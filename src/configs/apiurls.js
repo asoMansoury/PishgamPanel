@@ -1,0 +1,118 @@
+import { LOCAL_URL } from "src/lib/utils";
+
+export const apiUrls = {
+    "domains":{
+        "DomainUrl":"http://sale.lachom.ir"
+    },
+    "types":{
+        "Cisco": "OC1",
+        "SoftEther":"SF1",
+        "OpenVpn":"OP1"
+    },
+    "telegramUrl":{
+        "changeserver":`/api/telegram/changeserver`,
+        "changeUserPasswordUrl":`/api/telegram/changeuserpassword`
+    },
+    "localUrl":{
+        "getTariffsUrl": `/api/tariff/getatariff/?type=`,
+        "getTariffPlanUrl":`/api/tariff/getatariffplans/?type=`,
+        "getAgentTariffPlanUrl":`/api/tariff/getagentatariffplans/?name=`,
+        "getTariffPriceUrl":`/api/tariff/gettariffprice/?type=`,
+        "calculateTotalPrice":`/api/tariff/calculatetotalpriceapi/`,
+        "getAllTarifPriceUrl":`/api/tariff/getAllTariffPrices`,
+        "getAllAgentPlansUrl":`/api/tariff/getAllAgentPlans`
+
+    },
+    "agentUrl":{
+        "getAgentInformation":`/api/agents/getagent/?name=`,
+        "isAgentUrl":`/api/agents/isagent/?name=`,
+        "getAgentBill":'/api/agents/getAgentBill/',
+        "getagentprice":`/api/agents/getagentprice`,
+        "registerAgentPrice":`/api/agents/registeragentPrice`,
+        "defineSubAgentUrl":`/api/agents/defineSubAgent`,
+        "refundSubAgentUrl":`/api/agents/refundSubAgent`,
+        "increateAgentWallet":`/api/agents/increateAgentWallet`,
+        "decDebAgentWallet":`/api/agents/decreaseAgentWallet`,
+        "ChangeTelegramUrl":`/api/agents/changetelegram/?telegram=`,
+        "GetAllAgentsUrl":`/api/agents/getallAgent/`,
+        "GetAgentTestAccountsUrl":`/api/user/getagentusertests`,
+        "SendEmailToTestAccountsUrl":`/api/agents/SendEmailToTestAccounts`
+    },
+    "SubAgentUrl":{
+        "GetAllSubAgentsUrl":`/api/subagent/getAllAgents`
+    },
+    "userUrl":{
+        "OpenTunneleNewUserUrl":`/api/user/OpenTunnel/createnewuserOpenVpn/`,
+        "createNewUserUrl":`/api/user/createnewuser/`,
+        "insertuserbasketUrl":`/api/user/insertuserbasketapi/`,
+        "getusersbasket":`/api/user/getuserbasket/?uuid=`,
+        "getpurchasedUrl":`/api/user/getpurchasedaccounts/?email=`,
+        "getsubagentpurchasedUrl":`/api/user/getsubagentpurchased/?email=`,
+
+        "senToEmailUrl":`/api/user/senaccounttoemail/?email=`,
+        "getUserInformationUrl":`/api/user/getUserInformation/?username=`,
+        "getUserInformationByEmail":`/api/user/getUserInformationByEmail/?email=`,
+        "changeUserServerUrl":`/api/user/changeuserserver/`,
+        "createNewCiscoUserUrl":`/api/user/createnewusercisco/`,
+        "calculateUserForRevokeRul":`/api/user/calculateUserForRevoke`,
+        "revokeuserUrl":`/api/user/Cisco/revokeuser`,
+        "calculateRevokeUserUrl":`/api/user/Cisco/revokeprice`,
+        "ChangeUserPassworUrl":`/api/user/changeuserpassword`,
+        "TogglingUserConnectionUrl":`/api/user/ToggleUserConnection/?email=`,
+        "RestartUserConnectionUrl":`/api/user/RestartUserConnection/?username=`,
+        "DeactivatinUserConnectionUrl":`/api/user/DeactivateUserConnection/?username=`,
+        "ConvertingUsersUrl":`/api/user/convertAccounts`,
+        "ChangeUserVpnPasswordUrl":`/api/user/changeUserVpnPassword`,
+        "ShowUserDetailUrl":`/api/user/ShowingUserDetail/?username=`,
+    },
+    "redisUrl":{
+        "setRedisApi":`/api/redis/setredis/`,
+        "getRedisApi":`/api/redis/getredis/`
+    },
+    "server": {
+        "getServersApi":`/api/server/getservers`,
+        "getServersByTypeApi":`/api/server/getserversbytype?type=`,
+        "getServersForTestApi":`/api/server/getserversfortest?type=`,
+        "changeServerApi":`/api/server/changeserver`,
+        "getUsersServerApi":`/api/server/getuserserver?username=`
+    },
+    "customerUrls": {
+        "getCustomersApi":`/api/customer/getcustomer`,
+        "loginCustomerApi":`/api/user/login`,
+        "checkCustomerExistsApi":`/api/customer/checkuserexists`,
+        "createcustomerApi":`/api/customer/createcustomer`
+    },
+    "softwareUrls":{
+        "getLinksApi":"/api/software/getdownloadlinks"
+    },
+
+    "testAccountsUrls":{
+        "gettestaccount":"/api/testaccounts/gettest/?email=",
+        "isvalid":"/api/testaccounts/isvalid/?email="
+    },
+    "UserBasketUrls":{
+        "getUserBasketByUserNameApi":`/api/userbasket/getUserBasketByUserName/?username=`,
+        "insertusersbasketForRevokingApi":`/api/userbasket/insertusersbasketForRevoking`
+    },
+    "AdminManagementUrls":{
+        "DeleteExpiresUsersApi":`/api/admin/deleteexpiredaccount`,
+        "GetAgentInvoice":`/api/admin/getAgentInvoice/?username=`,
+        "InvoiceWithAgent":`/api/admin/InvoiceWithAgent/?agentCode=`,
+        "DefineNewAgent":`/api/admin/DefineNewAgent`,
+        "EnableIPV4Api":`/api/admin/EnableIPV4`,
+        "OpenVPNApi":`/api/admin/OpenVpn`,
+        "DeletingAdminUserConnectionUrl":`/api/admin/DeletingUserConnection/?email=`,
+    },
+    "TutorialUrls":{
+        "GetTutorial":`/api/tutorial/gettutorial`
+    },
+    "userfreeUrls":{
+        "GetUsersByUsername":`/api/userfree/getusersbyusername/?username=`,
+        "ChangeUserFreeServer":`/api/userfree/changeuserserver`
+    },
+    "WalletUrls":{
+        "GetUserWalletApi":`/api/wallet/getUserWallet/?email=`,
+        "GetUserWalletUsersApi":`/api/wallet/getUserWalletUsers/?email=`,
+        "TransferMoneyToOther":`/api/wallet/transferMoneyToOther/`
+    }
+}
