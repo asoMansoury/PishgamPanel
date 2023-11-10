@@ -2,7 +2,7 @@ import { LOCAL_URL } from "src/lib/utils";
 
 export const apiUrls = {
     "domains":{
-        "DomainUrl":"http://sale.lachom.ir"
+        "DomainUrl":"http://kafirose.online/"
     },
     "types":{
         "Cisco": "OC1",

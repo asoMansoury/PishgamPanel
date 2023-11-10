@@ -11,42 +11,48 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { GetAgentForServerAdmin } from 'src/configs/AgentsForServer';
 const navigation = () => {
-  const {  data:session,status } = useSession(); 
-  const [profileSelector,setProfileSelector] = useState({
-    isLoggedIn:false
+  const { data: session, status } = useSession();
+  const [profileSelector, setProfileSelector] = useState({
+    isLoggedIn: false
   });
-  useEffect(async()=>{
+  useEffect(async () => {
     //var session =await getSession();
-    if(status ==="authenticated"){
+    if (status === "authenticated") {
       setProfileSelector({
-        email:session.user.email,
-        isLoggedIn:true,
-        isAgent:session.user.isAgent,
-        isAdmin:session.user.isAdmin
+        email: session.user.email,
+        isLoggedIn: true,
+        isAgent: session.user.isAgent,
+        isAdmin: session.user.isAdmin
       });
     }
-  },[status]);
+  }, [status]);
   var tmpMenues = [];
 
 
-   
-  if(profileSelector.isLoggedIn==true){
-    tmpMenues.push({
-      title: 'خرید اکانت اپن وی پی',
-      icon: HomeOutline,
-      path: '/OpenTunnel'
-    });
-    tmpMenues.push({
-      title: 'خرید اکانت ایران',
-      icon: HomeOutline,
-      path: '/openvpn'
-    });
+
+  if (profileSelector.isLoggedIn == true) {
+    if (process.env.IsEnableOpenVPN == true){
+      tmpMenues.push({
+        title: 'خرید اکانت اپن وی پی',
+        icon: HomeOutline,
+        path: '/OpenTunnel'
+      });
+    }
+  
+    if (process.env.IsEnableIran == true){
+      tmpMenues.push({
+        title: 'خرید اکانت ایران',
+        icon: HomeOutline,
+        path: '/openvpn'
+      });
+    }
+
     tmpMenues.push({
       title: 'خرید اکانت Cisco',
       icon: HomeOutline,
       path: '/cisco'
     });
-    
+
     tmpMenues.push({
       title: 'تمدید اکانت',
       icon: AccountClock,
@@ -62,15 +68,15 @@ const navigation = () => {
     })
 
 
-    if(profileSelector.isLoggedIn&&profileSelector.isAgent==true){
-      tmpMenues.push(    {
+    if (profileSelector.isLoggedIn && profileSelector.isAgent == true) {
+      tmpMenues.push({
         title: 'تعریف قیمت کاربران',
         icon: AccountCogOutline,
         path: '/agentprice'
       });
 
-      if(GetAgentForServerAdmin(profileSelector.email).isValid==true){
-        tmpMenues.push(    {
+      if (GetAgentForServerAdmin(profileSelector.email).isValid == true) {
+        tmpMenues.push({
           title: 'مدیریت سرور',
           icon: AccountCogOutline,
           path: '/admin/Servers'
@@ -81,19 +87,19 @@ const navigation = () => {
 
 
 
-    if(profileSelector.isLoggedIn&&profileSelector.isAgent==true){
+    if (profileSelector.isLoggedIn && profileSelector.isAgent == true) {
       tmpMenues.push({
-        title:"مشاهده تست های  داده شده",
-        icon:AccountMultiple,
-        path:'/agent/TestedAccounts/'
+        title: "مشاهده تست های  داده شده",
+        icon: AccountMultiple,
+        path: '/agent/TestedAccounts/'
       })
 
       tmpMenues.push({
-        title:"تعریف زیرمجموعه فروش",
-        icon:AccountMultiple,
-        path:'/agent/DefineNewAgent/'
+        title: "تعریف زیرمجموعه فروش",
+        icon: AccountMultiple,
+        path: '/agent/DefineNewAgent/'
       })
-      
+
       tmpMenues.push({
         title: 'انتقال شارژ',
         icon: CreditCardOutline,
@@ -108,7 +114,7 @@ const navigation = () => {
 
   }
 
-  if(profileSelector.isAdmin == true){
+  if (profileSelector.isAdmin == true) {
     tmpMenues.push({
       sectionTitle: 'پنل مدیریت'
     })
@@ -125,7 +131,7 @@ const navigation = () => {
     })
   }
 
-  if(profileSelector.isLoggedIn==false){
+  if (profileSelector.isLoggedIn == false) {
     tmpMenues.push({
       sectionTitle: 'تغییر سرور اکانت'
     })
@@ -140,11 +146,15 @@ const navigation = () => {
   tmpMenues.push({
     sectionTitle: 'اکانت تستی'
   })
-  tmpMenues.push({
-    title: 'اکانت تست OpenVPN',
-    icon: HomeOutline,
-    path: '/testaccounts/OpenTunnel'
-  });
+
+  if (process.env.IsEnableOpenVPN == true) {
+    tmpMenues.push({
+      title: 'اکانت تست OpenVPN',
+      icon: HomeOutline,
+      path: '/testaccounts/OpenTunnel'
+    });
+  }
+
 
   tmpMenues.push({
     title: 'اکانت تست Cisco',
@@ -152,11 +162,14 @@ const navigation = () => {
     path: '/testaccounts'
   });
 
-  tmpMenues.push({
-    title: 'اکانت تست ایران',
-    icon: HomeOutline,
-    path: '/testaccounts/iran'
-  });
+  if (process.env.IsEnableIran == true) {
+    tmpMenues.push({
+      title: 'اکانت تست ایران',
+      icon: HomeOutline,
+      path: '/testaccounts/iran'
+    });
+  }
+
   tmpMenues.push({
     sectionTitle: 'نرم افزار'
   })
@@ -165,12 +178,14 @@ const navigation = () => {
     icon: DownloadBoxOutline,
     path: '/Tutorial/Cisco/'
   });
-
+if(process.env.IsEnableOpenVPN){
   tmpMenues.push({
     title: 'دانلود نرم افزار OpenVpn ',
     icon: DownloadBoxOutline,
     path: '/Tutorial/OpenVpn'
   });
+}
+
 
   tmpMenues.push({
     title: 'بخش آموزش ',
@@ -181,7 +196,7 @@ const navigation = () => {
 
 
 
-  
+
   return tmpMenues;
 }
 

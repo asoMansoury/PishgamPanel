@@ -16,7 +16,7 @@ export default function index() {
     const [softEtherTutorial, setSoftEtherTutorial] = useState({});
     const [openVPNTutorial, setOpenVPNTutorial] = useState({});
     // ** State
-    const [value, setValue] = useState('1')
+    const [value, setValue] = useState('2')
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
@@ -40,20 +40,27 @@ export default function index() {
                 <Card>
                     <TabContext value={value}>
                         <TabList centered onChange={handleChange} aria-label='card navigation example'>
-                            <Tab value='1' label='OpenVpn' />
+                            {process.env.IsEnableIran == true && <Tab value='1' label='OpenVpn' />}
                             <Tab value='2' label='سیسکو' />
-                            <Tab value='3' label='وی پی ان ایران' />
+                            {process.env.IsEnableIran == true && <Tab value='3' label='وی پی ان ایران' />}
                         </TabList>
                         <CardContent sx={{ textAlign: 'center' }}>
-                            <TabPanel value='1' sx={{ p: 0 }}>
-                                <OpenVPNLearning softEtherTutorial={openVPNTutorial}></OpenVPNLearning>
-                            </TabPanel>
+                            {
+                                process.env.IsEnableIran &&
+                                <TabPanel value='1' sx={{ p: 0 }}>
+                                    <OpenVPNLearning softEtherTutorial={openVPNTutorial}></OpenVPNLearning>
+                                </TabPanel>
+                            }
                             <TabPanel value='2' sx={{ p: 0 }}>
                                 <CiscoLearning ciscoTutorial={ciscoTutorial}></CiscoLearning>
                             </TabPanel>
-                            <TabPanel value='3' sx={{ p: 0 }}>
-                                <SoftEtherLearning softEtherTutorial={softEtherTutorial}></SoftEtherLearning>
-                            </TabPanel>
+                            {
+                                process.env.IsEnableOpenVPN &&
+                                <TabPanel value='3' sx={{ p: 0 }}>
+                                    <SoftEtherLearning softEtherTutorial={softEtherTutorial}></SoftEtherLearning>
+                                </TabPanel>
+                            }
+
                         </CardContent>
                     </TabContext>
                 </Card>
