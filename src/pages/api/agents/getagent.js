@@ -7,7 +7,7 @@ export default async function handler(req,res){
         const {name,type } = req.query;
         const session = await getSession({ req });
         var Agent = await GetAgentByUserCode(name,type);
-        
+        console.log({name,type});
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.status(200).json({name:Agent});
     }

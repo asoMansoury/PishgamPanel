@@ -52,6 +52,7 @@ const Cisco = () => {
     })
   }
   async function getAgentInformation(agentCode){
+    console.log("agentcode ", agentCode);
     setAgent(agentCode);
     var url = apiUrls.agentUrl.getAgentInformation+agentCode+`&type=${apiUrls.types.Cisco}`;
     axios.get(url).then(data =>{

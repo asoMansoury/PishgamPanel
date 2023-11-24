@@ -35,7 +35,6 @@ export async function GetAgentByUserCode(code, type) {
 
         const customerCollection = db.collection('Customers');
         const customerDocumnts = await customerCollection.findOne({ agentcode: agentCode });
-
         const TariffAgentCollection = db.collection('TariffAgent');
         const agentTariffs = await TariffAgentCollection.find({ agentcode: agentCode, type: type }).toArray();
         const AgentWallet = await GetWalletUser(customerDocumnts.email);
